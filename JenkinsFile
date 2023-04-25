@@ -1,0 +1,14 @@
+pipeline {
+agent any
+stages {
+stage('Build') {
+steps {
+  sh 'mvn clean package'
+}
+}
+stage('Deploy') {
+steps {
+deploy adapters: [tomcat9(credentialsId: '2c86cc08-411c-417b-9f0d-5b54881af267', path: '', url: 'http://15.207.247.109:8081/')], contextPath: null, war: '**/*.war'}
+}
+}
+}
